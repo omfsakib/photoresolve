@@ -1,0 +1,298 @@
+.content {
+    opacity: 0;
+    margin-top: 0;
+    max-height: 0;
+    transition: all 200ms linear;
+    will-change: opacity, max-height;
+}
+
+button[aria-expanded="true"] + .content {
+    opacity: 1;
+    margin-top: 2rem;
+    max-height: 9em;
+    transition: all 200ms linear;
+    will-change: opacity, max-height;
+}
+
+button[aria-expanded="true"] > .iconPlus {
+    display: none;
+}
+
+button[aria-expanded="false"] > .iconMinus {
+    display: none;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: "Helvetica", Helvetica, Montserrat, Arial, sans-serif;
+        color: black;
+    }
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 100;
+    src: url("../public/font/Helvetica/helvetica-light-587ebe5a59211.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 200;
+    src: url("../public/font/Helvetica/Helvetica-Oblique.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../public/font/Helvetica/Helvetica.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 600;
+    src: url("../public/font/Helvetica/Helvetica-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../public/font/Helvetica/Helvetica-BoldOblique.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 800;
+    src: url("../public/font/Helvetica/helvetica-compressed-5871d14b6903a.otf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 900;
+    src: url("../public/font/Helvetica/helvetica-rounded-bold-5871d05ead8de.otf");
+}
+
+.package-holder {
+    @apply flex items-center justify-between px-8 py-4 border cursor-pointer rounded-xl dark:border-gray-700;
+}
+
+.package-body {
+    @apply flex flex-col items-center space-y-1;
+}
+
+.package-title {
+    @apply text-lg font-medium text-gray-700 sm:text-xl dark:text-gray-200;
+}
+
+.package-price-tag {
+    @apply text-2xl font-semibold text-gray-500 sm:text-3xl dark:text-gray-300;
+}
+
+.package-price-discount {
+    @apply px-2 text-xs text-blue-500 bg-gray-100 rounded-full dark:text-blue-400 sm:px-4 sm:py-1 dark:bg-gray-700;
+}
+
+.package-item-body {
+    @apply p-8 mt-8 text-center ml-auto mr-auto space-y-8 bg-gray-100 dark:bg-gray-800 rounded-xl;
+}
+
+.active-mega-menu {
+    @apply bg-gray-50 dark:bg-gray-900;
+}
+
+#master-container-scroller {
+    height: 66px;
+    margin-bottom: -6px;
+    overflow: hidden;
+    position: relative;
+    line-height: 60px;
+}
+
+#master-container-scroller .master-container-scroller_item {
+    display: block;
+    height: 100%;
+    transition: 0.3s;
+    -webkit-animation: scroll 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    animation: scroll 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+}
+
+@keyframes scroll {
+    0.0% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+
+    3.7037037037037037% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+
+    11.11111111111111% {
+        -webkit-transform: translateY(-66px);
+        transform: translateY(-66px);
+    }
+
+    14.814814814814815% {
+        -webkit-transform: translateY(-66px);
+        transform: translateY(-66px);
+    }
+
+    22.22222222222222% {
+        -webkit-transform: translateY(-132px);
+        transform: translateY(-132px);
+    }
+
+    25.925925925925927% {
+        -webkit-transform: translateY(-132px);
+        transform: translateY(-132px);
+    }
+
+    33.333333333333336% {
+        -webkit-transform: translateY(-198px);
+        transform: translateY(-198px);
+    }
+
+    37.03703703703704% {
+        -webkit-transform: translateY(-198px);
+        transform: translateY(-198px);
+    }
+
+    44.44444444444444% {
+        -webkit-transform: translateY(-264px);
+        transform: translateY(-264px);
+    }
+
+    48.148148148148145% {
+        -webkit-transform: translateY(-264px);
+        transform: translateY(-264px);
+    }
+
+    55.55555555555556% {
+        -webkit-transform: translateY(-330px);
+        transform: translateY(-330px);
+    }
+
+    59.25925925925926% {
+        -webkit-transform: translateY(-330px);
+        transform: translateY(-330px);
+    }
+
+    66.66666666666667% {
+        -webkit-transform: translateY(-396px);
+        transform: translateY(-396px);
+    }
+
+    70.37037037037037% {
+        -webkit-transform: translateY(-396px);
+        transform: translateY(-396px);
+    }
+
+    77.77777777777777% {
+        -webkit-transform: translateY(-462px);
+        transform: translateY(-462px);
+    }
+
+    81.48148148148148% {
+        -webkit-transform: translateY(-462px);
+        transform: translateY(-462px);
+    }
+
+    88.88888888888889% {
+        -webkit-transform: translateY(-528px);
+        transform: translateY(-528px);
+    }
+
+    92.5925925925926% {
+        -webkit-transform: translateY(-528px);
+        transform: translateY(-528px);
+    }
+
+    100.0% {
+        -webkit-transform: translateY(-594px);
+        transform: translateY(-594px);
+    }
+}
+
+.slider-h {
+    height: calc(100vh - 73px);
+}
+.full-page-flex {
+    min-height: 100vh;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.heading {
+    @apply text-2xl md:text-[35px] font-Helvetica font-thin leading-none text-black dark:text-white max-w-lg mb-3;
+}
+
+.paragraph {
+    @apply mt-2 text-[13px] font-Montserrat font-normal text-black dark:text-slate-200;
+}
+
+.features-list {
+    @apply mb-3 lg:mb-4 -ml-1 space-y-2 text-black dark:text-slate-300;
+}
+.features-list li {
+    @apply text-sm font-Montserrat text-black dark:text-slate-300;
+}
+.fp-watermark {
+    display: none;
+}
+
+.grid-section {
+    @apply grid grid-cols-1 md:grid-cols-2 h-full min-h-full md:overflow-hidden;
+}
+.grid-area {
+    @apply flex h-screen flex-col-reverse justify-end  md:grid md:grid-cols-2 md:min-h-full md:h-[50vh];
+}
+.grid-area:nth-child(even) {
+    @apply bg-white dark:bg-slate-300;
+}
+.grid-area:nth-child(odd) {
+    @apply bg-white dark:bg-slate-300;
+}
+.grid-area:nth-child(3n + 0),
+.grid-area:nth-child(4n + 0) {
+    @apply md:flex md:flex-row-reverse;
+}
+.grid-area:nth-child(3n + 0) .grid-content-description,
+.grid-area:nth-child(4n + 0) .grid-content-description {
+    text-align: left;
+}
+.grid-area:nth-child(3n + 0) .grid-content,
+.grid-area:nth-child(4n + 0) .grid-content {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.grid-content {
+    @apply flex flex-col md:items-end md:justify-end flex-wrap font-Helvetica;
+}
+.grid-title {
+    @apply text-[17px] text-theme-color font-Helvetica font-black md:text-right mb-5;
+}
+.grid-content-description {
+    @apply md:text-right mb-5 text-xs;
+}
+.grid-image-area {
+    @apply py-[30px] px-[50px] md:p-0 flex items-center justify-center h-full;
+}
+.grid-image {
+    @apply w-full h-full;
+}
+.grid-image img {
+    @apply w-full h-full object-cover select-none;
+}
+.grid-btn-round {
+    @apply text-[13px] px-2 py-1 font-normal text-white transition-colors duration-300 transform bg-theme-color hover:bg-slate-900 rounded-xl;
+}

@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="service_content">
+            <div class="action_button">
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                  </svg> back</a> 
+            </div>
+            <div class="heading">
+                <h3>{{pricing.name}}</h3>
+            </div>
+            <div class="service_price">
+                <h4>Start From ₤{{pricing.rate|floatformat:2}}/ Per Photo</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6"><br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Pakage name :
+                <input type="text" name="pricing_name" class="form-control" value="{{pricing.name}}">
+            </p>
+            <p>Price starts from :
+            <input type="number" step="0.01" value="{{pricing.rate}}" class="form-control" name="pricing_price"></p>
+            <button class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

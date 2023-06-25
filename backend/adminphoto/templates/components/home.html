@@ -1,0 +1,413 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="store-tab" data-bs-toggle="tab" data-bs-target="#store" type="button" role="tab" aria-controls="store" aria-selected="true">Home </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Services</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Portfolio</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing" type="button" role="tab" aria-controls="pricing" aria-selected="false">Pricing</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="terms-tab" data-bs-toggle="tab" data-bs-target="#terms" type="button" role="tab" aria-controls="terms" aria-selected="false">Terms & Conditions</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="store" role="tabpanel" aria-labelledby="store-tab">
+        <div class="container"  style="margin-top: 20px;">
+            <div class="row">
+                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                    <p class="text-center"><b>"Navigations"</b> </p>
+                    <table class="table">
+                        <thead>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            {% for i in navigations %}
+                            <tr>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <td><input type="hidden" name="navigation_id" value="{{i.id}}"><input type="text" class="form-control" name="navigation_name" value="{{i.name}}"></td>
+                                    <td><button class="btn btn-info" type="submit">Update</button></td>
+                                </form>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <hr>
+                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                    <p class="text-center"><b>"Slide Texts"</b> </p>
+                    <table class="table">
+                        <thead>
+                            <th>Name</th>
+                            <th>Color Code</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            {% for i in slides %}
+                            <tr>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <td><input type="hidden" name="slide_id" value="{{i.id}}"><input type="text" class="form-control" name="slide_text" value="{{i.text}}"></td>
+                                    <td><input type="text" class="form-control" name="slide_color" value="{{i.class_name}}"></td>
+                                    <td><button class="btn btn-info" type="submit">Update</button></td>
+                                </form>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <hr>
+                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                    <p class="text-center"><b>"Slide Caption"</b> </p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p>
+                            <textarea class="form-control" name="slide_caption" id="" cols="30" rows="5">{{slideinfo.caption}}</textarea> 
+                        </p>
+                        <button type="submit" class="btn- btn-success" >Update</button>
+                    </form>
+                </div> <hr>
+                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                    <p class="text-center"><b>"Footer Details"</b> </p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p> Footer left Side Description: 
+                            <textarea class="form-control" name="footer_description" id="" cols="30" rows="5">{{footer.description}}</textarea>  <br>
+                        </p>
+                        <p>Footer Right Side Short Note:
+                            <textarea class="form-control" name="footer_shote_note" id="" cols="30" rows="5">{{footer.short_info}}</textarea> 
+                        </p>
+                        <button type="submit" class="btn- btn-success" >Update</button>
+                    </form>
+                </div> <hr>
+                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                    <p class="text-center"><b>"Logo SVG Code"</b> </p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p>"""svg class="w-8" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="#ffffff" fill="none" aria-label="logo" title="Home Page">
+                            <textarea class="form-control" name="logo_code" id="" cols="30" rows="5">{{logo.svg_code}}</textarea> 
+                            svg """
+                        </p>
+                        <button type="submit" class="btn- btn-success" >Update</button>
+                    </form>
+                </div> <hr>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home-tab" style="border: 2px solid rgb(124, 123, 123); border-top: none;" >
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_services">
+                    {% for service in services %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="service_content">
+                                <div class="heading">
+                                    <h4 class="text-center">Service</h4> <hr>
+                                    <h4>{{service.name}}</h4>
+                                    <p>{{service.description}}</p>
+                                </div>
+                                <div class="service_images">
+                                    <img src="{{service.after}}" alt="After Image">
+                                </div>
+                                <div class="service_price">
+                                    <h4>Start From ₤{{service.rate|floatformat:2}}/ Per Photo</h4>
+                                </div>
+                                <div class="action_button">
+                                    <a href="{% url 'edit-service' service.id %}" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                      </svg> Edit</a><br><br>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-md-6">
+                            <div class="sub_services_content">
+                                <div class="table">
+                                    <h4>Sub Services of {{service.name}}</h4><hr>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Before</th>
+                                                <th>After</th>
+                                                <th>Price</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in service.sub_services %}
+                                            <tr>
+                                                <td>{{i.name}}</td>
+                                                <td><img class="sub_services_image" src="{{i.before}}" alt=""></td>
+                                                <td><img class="sub_services_image" src="{{i.after}}" alt=""></td>
+                                                <td>Start From ₤{{i.rate|floatformat:2}}/ Per Photo</td>
+                                                <td style="display: flex;"><a href="{% url 'edit-sub-service' i.id %}" class="btn btn-sm btn-info" style="margin-right: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                  </svg></a>
+                                                <form method="POST">
+                                                    {% csrf_token %}
+                                                    <button type="submit" name="sub_services_remove" value="{{i.id}}" class="btn btn-sm btn-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                        </svg>
+                                                    </button>
+                                            </form></td>
+                                            </tr> 
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <br> <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="container" style="margin-top: 20px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="upload_image">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>Upload image : 
+                                <input type="file" name="portfolio_image" class="form-control">
+                            </p>
+                            <button type="submit" class="btn btn-secondary">upload</button>
+                        </form><br><br>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="images   d-flex flex-wrap">
+                        {% for i in portfolio %}
+                        <div class="col-md-3" style="margin-top: 20px;">
+                            <div class="portfolio" style="display: flex;justify-content: center;
+                            align-items: center;">
+                                <img style="max-height: 200px; max-width: 200px;" src="{{i.thumb.url}}" alt="">
+                                <div class="buttons" style="display: flex;">
+                                        <button  value="{{i.id}}" onclick="openFileSelect2('{{ i.id }}')" name="portfolio_replace" class="btn btn-secondary" style="position: relative; margin-right: 5px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16"> <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/> <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/> </svg>
+                                        </button>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" value="{{i.id}}" name="portfolio_delete" class="btn btn-secondary">X</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="col-md-3" style="margin-top: 20px;">
+                            <button style="height: 200px; width: 200px;" onclick="openFileSelect()"><img style="max-height: 150px;" src="/static/images/img_84809.png" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pricing" role="tabpanel" aria-labelledby="pricing-tab">
+        <div class="container" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pricings">
+                    <table class="table">
+                        <thead>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            {% for i in pricings %}
+                            <tr>
+                                <td>{{i.name}}</td>
+                                <td>{{i.rate|floatformat:2}}</td>
+                                <td><a href="{% url 'edit-pricing' i.id %}" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                  </svg> Edit</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div></div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="container" style="margin-top: 20px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact_info">
+                        <div class="heading">
+                            <h3>Contact Info</h3>
+                        </div>
+                        <div class="content">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{contact.id}}" class="form-control" name="contact_id">
+                                <p>Caption :
+                                    <input type="text" value="{{contact.caption}}" class="form-control" name="caption">
+                                </p>
+                                <p>Phone :
+                                    <input type="text" value="{{contact.phone}}" class="form-control" name="phone">
+                                </p>
+                                <p>Email :
+                                    <input type="email" value="{{contact.email}}" class="form-control" name="email">
+                                </p>
+                                <p>Address :
+                                    <input type="text" value="{{contact.address}}" class="form-control" name="address">
+                                </p>
+                                <button class="btn btn-success">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="3" class="text-center"> <h3>Queries</h3></th>
+                            </tr>
+                            <tr>
+                                <th>Name </th>
+                                <th>Email </th>
+                                <th>Message </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in queries %}
+                            <tr>
+                                <td>{{i.name}}</td>
+                                <td>{{i.email}}</td>
+                                <td>{{i.description}}</td>
+                                <td>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" value="{{i.id}}" name="query_delete" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                        </svg> Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="terms" role="tabpanel" aria-labelledby="terms-tab">
+        <div class="container" style="margin-top: 20px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading text-center">
+                        <h3>Terms and Conditions Page</h3>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <textarea name="terms_page" class="form-control" cols="30" rows="30">{{terms.terms}}</textarea>
+                        <button type="submit" class="btn btn-secondary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function openFileSelect() {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.addEventListener('change', () => {
+    const selectedFile = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    formData.append('csrfmiddlewaretoken', csrfToken);
+    fetch('/upload/', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = '/';
+        } else {
+          console.log('Error uploading file');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  });
+  fileInput.click();
+}
+</script>
+<script>
+function openFileSelect2(id) {
+    console.log(id)
+    const fileInput2 = document.createElement('input');
+    fileInput2.type = 'file';
+    fileInput2.addEventListener('change', () => {
+      const selectedFile2 = fileInput2.files[0];
+      const formData2 = new FormData();
+      formData2.append('file', selectedFile2);
+      const csrfToken2 = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+      formData2.append('csrfmiddlewaretoken', csrfToken2);
+      fetch('/edit/portfolio/'+id, {
+        method: 'POST',
+        body: formData2
+      })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = '/';
+          } else {
+            console.log('Error uploading file');
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+    fileInput2.click();
+  }
+  </script>
+<style>
+    .portfolio {
+    position: relative;
+}
+
+.portfolio img {
+    display: block;
+}
+.portfolio:hover img {
+  filter: blur(3px);
+}
+.portfolio .buttons {
+    position: absolute;
+    top:0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.portfolio:hover .buttons {
+    opacity: 1;
+}
+
+</style>
+{% endblock %}
