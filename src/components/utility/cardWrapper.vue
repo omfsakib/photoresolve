@@ -178,6 +178,9 @@ export default {
   justify-content: center;
   z-index: 9999;
 }
+.max-h-screen {
+  max-height: 85vh !important;
+}
 @media (max-width: 768px) {
   .popup-overlay {
     position: fixed;
@@ -207,7 +210,7 @@ export default {
   max-height: 90%;
   background-color: white;
   border-radius: 5px;
-  overflow: auto;
+  overflow: hidden;
   text-align: center;
   object-fit: contain;
   display: grid;
@@ -229,7 +232,6 @@ export default {
     position: absolute;
     inset: 0;
     width: var(--position);
-    filter: grayscale(100%)
 }
 .slider{
     position: absolute;
@@ -278,5 +280,6 @@ export default {
   color: #999;
   cursor: pointer;
   z-index: 999;
+  font-family: initial;
 }
 </style>

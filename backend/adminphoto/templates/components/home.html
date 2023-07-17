@@ -1,36 +1,60 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<ul class="nav nav-tabs" id="myTab" role="tablist">
+<style>
+    .nav-link {
+  color:rgb(255 255 255 / 1) !important;
+}
+.nav-tabs {
+  border-bottom: none !important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    background-color: transparent;
+}
+</style>
+<nav class="navbar navbar-expand-lg justify-content-between" style="background-color:rgb(79 71 71 /1); padding:10px; color:rgb(255 255 255 / 1)">
+ <a class="navbar-brand" href="https://app.photoresolve.com/">
+      <img src="https://photoresolve.com/photoresolve_icon.png" height="32px" width="32px" style="filter: invert(100%);">
+      <span style="color:rgb(255 255 255 / 1)">PHOTO RESOLVE</span>
+      </a>
+  <div class="navbar" id="navbarNavDropdown">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="store-tab" data-bs-toggle="tab" data-bs-target="#store" type="button" role="tab" aria-controls="store" aria-selected="true">Home </button>
+      <button style="color:rgb(255 255 255 / 1)"  class="nav-link active" id="store-tab" data-bs-toggle="tab" data-bs-target="#store" type="button" role="tab" aria-controls="store" aria-selected="true">Home </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Services</button>
+      <button style="color:rgb(255 255 255 / 1)" class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Services</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Portfolio</button>
+      <button style="color:rgb(255 255 255 / 1)" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Portfolio</button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing" type="button" role="tab" aria-controls="pricing" aria-selected="false">Pricing</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+      <button style="color:rgb(255 255 255 / 1)" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="terms-tab" data-bs-toggle="tab" data-bs-target="#terms" type="button" role="tab" aria-controls="terms" aria-selected="false">Terms & Conditions</button>
     </li>
+    <li class="nav-item" role="presentation">
+      <a  class="btn nav-link" style="float: right; margin-right: 15px; color:rgb(255 255 255 / 1)" href="/admin">Admin</a>
+    </li>
   </ul>
+  </div>
+</nav>
+
+
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="store" role="tabpanel" aria-labelledby="store-tab">
-        <div class="container"  style="margin-top: 20px;">
+        <div style="margin-top: 20px; padding: 20px">
             <div class="row">
-                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                <div class="col-md-12">
                     <p class="text-center"><b>"Navigations"</b> </p>
                     <table class="table">
                         <thead>
                             <th>Name</th>
-                            <th>Action</th>
+                            <th style="text-align:right;">Action</th>
                         </thead>
                         <tbody>
                             {% for i in navigations %}
@@ -38,20 +62,20 @@
                                 <form method="POST">
                                     {% csrf_token %}
                                     <td><input type="hidden" name="navigation_id" value="{{i.id}}"><input type="text" class="form-control" name="navigation_name" value="{{i.name}}"></td>
-                                    <td><button class="btn btn-info" type="submit">Update</button></td>
+                                    <td style="text-align:right;"><button class="btn btn-info" type="submit">Update</button></td>
                                 </form>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-                </div> <hr>
-                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                </div>
+                <div class="col-md-12">
                     <p class="text-center"><b>"Slide Texts"</b> </p>
                     <table class="table">
                         <thead>
                             <th>Name</th>
                             <th>Color Code</th>
-                            <th>Action</th>
+                            <th style="text-align:right;">Action</th>
                         </thead>
                         <tbody>
                             {% for i in slides %}
@@ -60,60 +84,86 @@
                                     {% csrf_token %}
                                     <td><input type="hidden" name="slide_id" value="{{i.id}}"><input type="text" class="form-control" name="slide_text" value="{{i.text}}"></td>
                                     <td><input type="text" class="form-control" name="slide_color" value="{{i.class_name}}"></td>
-                                    <td><button class="btn btn-info" type="submit">Update</button></td>
+                                    <td style="text-align:right;"><button class="btn btn-info" type="submit">Update</button></td>
                                 </form>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-                </div> <hr>
-                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                </div>
+                <div class="col-md-12">
                     <p class="text-center"><b>"Slide Caption"</b> </p>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <p>
-                            <textarea class="form-control" name="slide_caption" id="" cols="30" rows="5">{{slideinfo.caption}}</textarea> 
-                        </p>
-                        <button type="submit" class="btn- btn-success" >Update</button>
-                    </form>
-                </div> <hr>
-                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <td><textarea class="form-control" name="slide_caption" id="" cols="30" rows="5">{{slideinfo.caption}}</textarea> </td>
+                                    <td style="text-align:right;"><button  type="submit" class="btn btn-info" >Update</button></td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <br> <br>
+                <div class="col-md-12">
                     <p class="text-center"><b>"Footer Details"</b> </p>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <p> Footer left Side Description: 
-                            <textarea class="form-control" name="footer_description" id="" cols="30" rows="5">{{footer.description}}</textarea>  <br>
-                        </p>
-                        <p>Footer Right Side Short Note:
-                            <textarea class="form-control" name="footer_shote_note" id="" cols="30" rows="5">{{footer.short_info}}</textarea> 
-                        </p>
-                        <button type="submit" class="btn- btn-success" >Update</button>
-                    </form>
-                </div> <hr>
-                <div class="col-md-12" style="max-height: 300px; overflow: auto;">
+                    <table class="table">
+                        <thead>
+                            <th>Footer left Side Description</th>
+                            <th>Footer Right Side Short Note</th>
+                            <th style="text-align:right;">Action</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <td><textarea class="form-control" name="footer_description" id="" cols="30" rows="5">{{footer.description}}</textarea> </td>
+                                    <td><textarea class="form-control" name="footer_shote_note" id="" cols="30" rows="5">{{footer.short_info}}</textarea> </td>
+                                    <td style="text-align:right;"><button class="btn btn-info" type="submit">Update</button></td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <br> <br>
+                <div class="col-md-12">
                     <p class="text-center"><b>"Logo SVG Code"</b> </p>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <p>"""svg class="w-8" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="#ffffff" fill="none" aria-label="logo" title="Home Page">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <td>"""svg class="w-8" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="#ffffff" fill="none" aria-label="logo" title="Home Page">
                             <textarea class="form-control" name="logo_code" id="" cols="30" rows="5">{{logo.svg_code}}</textarea> 
-                            svg """
-                        </p>
-                        <button type="submit" class="btn- btn-success" >Update</button>
-                    </form>
-                </div> <hr>
+                            svg """ </td>
+                            <td>
+                                    <button  class="btn btn-info" type="submit">Update</button></td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home-tab" style="border: 2px solid rgb(124, 123, 123); border-top: none;" >
+    <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
             <div class="col-md-12">
+                <div class="row" style="margin-top:20px">
+                    <div class="col-md-6">
+                                    <h4 class="text-center">Service</h4> <hr>
+                    </div>
+                    <div class="col-md-6" >
+                                    <h4 class="text-center">Sub Services </h4>
+                                    <hr>
+                        
+                    </div>
+                </div>
                 <div class="main_services">
                     {% for service in services %}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="service_content">
                                 <div class="heading">
-                                    <h4 class="text-center">Service</h4> <hr>
                                     <h4>{{service.name}}</h4>
                                     <p>{{service.description}}</p>
                                 </div>
@@ -134,7 +184,6 @@
                         <div class="col-md-6">
                             <div class="sub_services_content">
                                 <div class="table">
-                                    <h4>Sub Services of {{service.name}}</h4><hr>
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -172,24 +221,31 @@
                                 </div>
                             </div>
                         </div>
-                    </div> <br> <hr>
+                    </div> <br>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade" id="profile" style="padding: 20px;border: 1px solid #dee2e6; border-top: none;" role="tabpanel" aria-labelledby="profile-tab">
         <div class="container" style="margin-top: 20px;">
             <div class="row">
                 <div class="col-md-12">
                     <div class="upload_image">
-                        <form method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <p>Upload image : 
+                        <table class="table">
+                        <tbody>
+                            <tr>
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <p>Upload image : </p> 
+                                    <td>
                                 <input type="file" name="portfolio_image" class="form-control">
-                            </p>
-                            <button type="submit" class="btn btn-secondary">upload</button>
-                        </form><br><br>
+                            </td>
+                                    <td style="text-align:right;"><button type="submit" class="btn btn-secondary">Upload</button></td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table><br><br>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -211,31 +267,38 @@
                             </div>
                         </div>
                         {% endfor %}
-                        <div class="col-md-3" style="margin-top: 20px;">
-                            <button style="height: 200px; width: 200px;" onclick="openFileSelect()"><img style="max-height: 150px;" src="/static/images/img_84809.png" alt=""></button>
+                        <div class="col-md-3"  style="
+                            height: 200px;
+                            width: 200px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-top: 20px;
+                            ">
+                            <button style="height: 77px; width: 77px;background: none;border: none;" onclick="openFileSelect()"><img style="max-height: 77px;" src="/static/images/upload.png" alt=""></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="pricing" role="tabpanel" aria-labelledby="pricing-tab">
-        <div class="container" style="margin-top: 20px;">
+    <div class="tab-pane fade" style="padding: 20px;border: 1px solid #dee2e6; border-top: none;" id="pricing" role="tabpanel" aria-labelledby="pricing-tab">
+        <div style="margin-top: 20px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="pricings">
                     <table class="table">
                         <thead>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Action</th>
+                            <th style="text-align:right;">Name</th>
+                            <th style="text-align:center;">Price</th>
+                            <th style="text-align:left;">Action</th>
                         </thead>
                         <tbody>
                             {% for i in pricings %}
                             <tr>
-                                <td>{{i.name}}</td>
-                                <td>{{i.rate|floatformat:2}}</td>
-                                <td><a href="{% url 'edit-pricing' i.id %}" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <td style="text-align:right;">{{i.name}}</td>
+                                <td style="text-align:center;">{{i.rate|floatformat:2}}</td>
+                                <td style="text-align:left;"><a href="{% url 'edit-pricing' i.id %}" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                   </svg> Edit</a></td>
@@ -247,8 +310,8 @@
             </div>
         </div></div>
     </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        <div class="container" style="margin-top: 20px;">
+    <div class="tab-pane fade" style="padding: 20px;border: 1px solid #dee2e6; border-top: none;" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div style="margin-top: 20px;">
             <div class="row">
                 <div class="col-md-12">
                     <div class="contact_info">
@@ -280,7 +343,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th colspan="3" class="text-center"> <h3>Queries</h3></th>
+                                <th colspan="4" class="text-center"> <h3>Queries</h3></th>
                             </tr>
                             <tr>
                                 <th>Name </th>
@@ -312,8 +375,8 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="terms" role="tabpanel" aria-labelledby="terms-tab">
-        <div class="container" style="margin-top: 20px;">
+    <div class="tab-pane fade" style="padding: 20px;border: 1px solid #dee2e6; border-top: none;" id="terms" role="tabpanel" aria-labelledby="terms-tab">
+        <div style="margin-top: 20px;">
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading text-center">
@@ -321,7 +384,7 @@
                     </div>
                     <form method="POST">
                         {% csrf_token %}
-                        <textarea name="terms_page" class="form-control" cols="30" rows="30">{{terms.terms}}</textarea>
+                        <textarea name="terms_page" class="form-control" cols="30" rows="850">{{terms.terms}}</textarea> <br>
                         <button type="submit" class="btn btn-secondary">Update</button>
                     </form>
                 </div>

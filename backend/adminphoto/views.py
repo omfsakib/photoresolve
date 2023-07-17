@@ -2,10 +2,13 @@ from django.shortcuts import render,redirect
 from django.http import JsonResponse,HttpResponseBadRequest
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
+from urllib.parse import unquote
+from django.template.defaultfilters import floatformat
+
 
 # Create your views here.
 def getServices(request, *args, **kwargs):
-    base_url = "http://127.0.0.1:8000/static"
+    base_url = "https://app.photoresolve.com/static"
     import_services = Services.objects.all().order_by('date_created')
     card = {}
     num = 1
@@ -26,12 +29,14 @@ def getServices(request, *args, **kwargs):
             viewType = "right"
         else:
             viewType = "left"
+        
+        price_start = floatformat(i.rate, 2)
 
         item = {
             'title': i.name,
             'button_name':i.button_name,
             'content': i.description,
-            'start': f'Start From ₤{i.rate} / Per Photo',
+            'start': f'Starts From ₤{price_start} / Per Photo',
             'link': 'contact',
             'cover': {
                 'image': base_url + i.after.url,
@@ -66,7 +71,7 @@ def get_slide_text(request):
     return JsonResponse(data, safe=False)
 
 def get_slide_info(request):
-    base_url = "http://127.0.0.1:8000/static"
+    base_url = "http://app.photoresolve.com/static"
     slide = SlideInfo.objects.first()
     data = {'caption': slide.caption, 'class': base_url + slide.cover.url }
     return JsonResponse(data, safe=False)
@@ -100,9 +105,10 @@ def get_terms(request):
         return HttpResponse(status=404)
 
 def getService(request,*arg,**kwargs):
-    base_url = "http://127.0.0.1:8000/static"
+    base_url = "https://app.photoresolve.com/static"
     name = kwargs.pop('name')
-    import_services = Services.objects.get(name = name)
+    decoded_str = unquote(name)
+    import_services = Services.objects.get(name = decoded_str)
     import_sub_services =SubServices.objects.filter(service = import_services)
     featureList = []
     sub_services1 = []
@@ -114,10 +120,11 @@ def getService(request,*arg,**kwargs):
             'name': i.name,
         }
         featureList.append(list)
+        price_start = floatformat(i.rate, 2)
         item = {
             'title' : i.name,
             'description' : i.description,
-            'price' : "For only ₤"+ str(i.rate) +"/ photo.",
+            'price' : "Starts From ₤"+ str(price_start) +"/ photo.",
             'before' : base_url + i.before.url,
             'after' : base_url + i.after.url,
         }
@@ -136,7 +143,7 @@ def getService(request,*arg,**kwargs):
         })
 
 def getPortfolio(request):
-    base_url = "http://127.0.0.1:8000/static"
+    base_url = "http://app.photoresolve.com/static"
     import_portfolio = Portfolio.objects.all().order_by('date_created')
 
     portfolio = []
@@ -366,7 +373,7 @@ def editService(request,pk):
         service_description = request.POST.get('service_description')
         service.rate = service_price
         service.description = service_description
-        button_name = request.POST.get('before_image')
+        button_name = request.POST.get('button_name')
         service.button_name = button_name
         
         after_image = request.FILES.get('after_image')

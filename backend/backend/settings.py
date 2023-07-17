@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=lm@l2ru)%o*o0rrxau2uj)kz@7ftpo&+x*dw6n%8z*dsy5zd*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['app.photoresolve.com','www.app.photoresolve.com']
 
 
 # Application definition

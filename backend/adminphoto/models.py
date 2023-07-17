@@ -77,11 +77,11 @@ class Slide(models.Model):
 
 class SlideInfo(models.Model):
     caption = models.CharField(max_length=200)
-    cover = models.ImageField(default="image-placeholder-500x500.jpg",null = True,blank = True)
+    cover = models.ImageField(null = True,blank = True)
 
     def __str__(self):
         return self.caption
-    
+        
 
 class TermsAndConditions(models.Model):
     terms =  models.TextField(max_length=200000,blank = True, null=True)
